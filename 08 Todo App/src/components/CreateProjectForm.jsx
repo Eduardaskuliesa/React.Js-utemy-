@@ -1,8 +1,11 @@
 import React from "react";
 import Input from "./Input";
 import Modal from "./Modal";
+import { useContext } from "react";
+import { ProjectContext } from "../store/project-context";
 
-const CreateProjectForm = ({ onSave, onCancel }) => {
+const CreateProjectForm = () => {
+  const {cancelProject, addProject } = useContext(ProjectContext)
   const modal = React.useRef();
   const title = React.useRef();
   const description = React.useRef();
@@ -21,7 +24,7 @@ const CreateProjectForm = ({ onSave, onCancel }) => {
       modal.current.open();
       return;
     }
-    onSave({
+    addProject({
       title: enteredTitle,
       description: enteredDescription,
       dueDate: enteredDueDate,
@@ -39,7 +42,7 @@ const CreateProjectForm = ({ onSave, onCancel }) => {
       <div className="w-[35rem] mt-16">
         <menu className="flex items-center justify-end gap-4 my-4">
           <li>
-            <button onClick={onCancel} className="text-stone-800 hover:text-stone-950">
+            <button onClick={cancelProject} className="text-stone-800 hover:text-stone-950">
               Cancel
             </button>
           </li>
